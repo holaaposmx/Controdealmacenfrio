@@ -6,6 +6,11 @@ import {
   createQualityIncident,
   updateQualityIncident,
 } from "@/lib/db";
+import {
+  isOnline,
+  saveOfflineOperation,
+  getOfflineDataByKey,
+} from "@/lib/offlineStorage";
 import type { Database } from "@/types/database.types";
 
 // Types for the service
@@ -33,13 +38,29 @@ export async function recordTemperature(log: {
   recordedBy: string;
   notes?: string;
 }): Promise<TemperatureLog> {
-  return await createTemperatureLog({
+  const logData = {
     storage_area: log.storageArea,
     temperature: log.temperature,
     status: log.status,
     recorded_by: log.recordedBy,
     notes: log.notes || null,
-  });
+  };
+
+  // Check if we're online
+  if (!isOnline()) {
+    // Store operation for later sync
+    const operationId = saveOfflineOperation("temperature_log", logData);
+
+    // Return a mock log for the UI
+    return {
+      id: `temp_${operationId}`,
+      ...logData,
+      created_at: new Date().toISOString(),
+    } as TemperatureLog;
+  }
+
+  // Online flow
+  return await createTemperatureLog(logData);
 }
 
 export async function getAllQualityIncidents(): Promise<QualityIncident[]> {
@@ -59,7 +80,7 @@ export async function reportQualityIncident(incident: {
   reportedBy: string;
   notes?: string;
 }): Promise<QualityIncident> {
-  return await createQualityIncident({
+  const incidentData = {
     incident_type: incident.incidentType,
     description: incident.description,
     severity: incident.severity,
@@ -68,7 +89,31 @@ export async function reportQualityIncident(incident: {
     reported_by: incident.reportedBy,
     status: "open",
     resolution_notes: incident.notes || null,
-  });
+  };
+
+  // Check if we're online
+  if (!isOnline()) {
+    // Store operation for later sync
+    const operationId = saveOfflineOperation("quality_incident", incidentData);
+
+    // Return a mock incident for the UI
+    return {
+      id: `temp_${operationId}`,
+      ...incidentData,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      resolved_at: null,
+      inventory_items: incident.relatedProductId
+        ? { product_name: "Offline Product" }
+        : null,
+      warehouse_locations: incident.relatedLocationId
+        ? { location_code: incident.relatedLocationId }
+        : null,
+    } as QualityIncident;
+  }
+
+  // Online flow
+  return await createQualityIncident(incidentData);
 }
 
 export async function updateIncidentStatus(

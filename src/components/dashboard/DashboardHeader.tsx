@@ -15,6 +15,7 @@ import {
 } from "../ui/dropdown-menu";
 import { useI18n } from "@/lib/i18n";
 import { LanguageToggle } from "../ui/language-toggle";
+import OfflineIndicator from "../offline/OfflineIndicator";
 
 interface DashboardHeaderProps {
   userName?: string;
@@ -96,6 +97,9 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
             className="pl-8 bg-gray-50 border-gray-200 focus:bg-white"
           />
         </div>
+
+        {/* Offline Indicator */}
+        <OfflineIndicator />
 
         {/* Notifications */}
         <DropdownMenu>

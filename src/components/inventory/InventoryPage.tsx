@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import BarcodeScanner from "./BarcodeScanner";
 import DashboardHeader from "../dashboard/DashboardHeader";
 import Sidebar from "../layout/Sidebar";
@@ -46,6 +47,7 @@ const InventoryPage: React.FC<InventoryPageProps> = ({
   userRole = "Warehouse Manager",
   userAvatar = "https://api.dicebear.com/7.x/avataaars/svg?seed=warehouse",
 }) => {
+  const navigate = useNavigate();
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [showScanner, setShowScanner] = useState(false);
@@ -201,7 +203,11 @@ const InventoryPage: React.FC<InventoryPageProps> = ({
                 <Scan className="h-4 w-4" />
                 <span>Scan Barcode</span>
               </Button>
-              <Button variant="outline" className="flex items-center gap-2">
+              <Button
+                variant="outline"
+                className="flex items-center gap-2"
+                onClick={() => navigate("/inventory/receive")}
+              >
                 <Plus className="h-4 w-4" />
                 <span>Add Product</span>
               </Button>

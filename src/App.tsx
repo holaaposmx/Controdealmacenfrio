@@ -6,6 +6,7 @@ import routes from "tempo-routes";
 import Home from "./components/home";
 import InventoryPage from "./components/inventory/InventoryPage";
 import SpaceAllocationPage from "./components/inventory/SpaceAllocationPage";
+import ProductReceptionPage from "./components/inventory/ProductReceptionPage";
 import QualityControlPage from "./components/quality/QualityControlPage";
 import ReportsPage from "./components/reports/ReportsPage";
 import LogisticsPage from "./components/logistics/LogisticsPage";
@@ -31,6 +32,7 @@ const MainRoutes = () => (
   <Routes>
     <Route path="/" element={<Home />} />
     <Route path="/inventory" element={<InventoryPage />} />
+    <Route path="/inventory/receive" element={<ProductReceptionPage />} />
     <Route path="/space-allocation" element={<SpaceAllocationPage />} />
     <Route path="/quality" element={<QualityControlPage />} />
     <Route path="/reports" element={<ReportsPage />} />
