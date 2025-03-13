@@ -67,10 +67,10 @@ const QualityControlPage: React.FC<QualityControlPageProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">Quality Control</h1>
+              <h1 className="text-2xl font-bold">Control de Calidad</h1>
               <p className="text-muted-foreground">
-                Monitor product quality, temperature conditions, and manage
-                incidents
+                Monitorear calidad de productos, condiciones de temperatura y
+                gestionar incidentes
               </p>
             </div>
             <div className="flex gap-2">

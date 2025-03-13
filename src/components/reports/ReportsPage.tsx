@@ -61,9 +61,9 @@ const ReportsPage: React.FC<ReportsPageProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">Reports</h1>
+              <h1 className="text-2xl font-bold">Informes y Reportes</h1>
               <p className="text-muted-foreground">
-                Generate and view warehouse operation reports
+                Generar y visualizar informes de operaciones de almacén
               </p>
             </div>
             <div className="flex gap-2">

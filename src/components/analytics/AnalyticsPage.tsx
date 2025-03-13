@@ -67,9 +67,9 @@ const AnalyticsPage: React.FC<AnalyticsPageProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">Analytics Dashboard</h1>
+              <h1 className="text-2xl font-bold">Panel de Análisis</h1>
               <p className="text-muted-foreground">
-                View warehouse performance metrics and analytics
+                Ver métricas de rendimiento y análisis del almacén
               </p>
             </div>
             <div className="flex gap-2">

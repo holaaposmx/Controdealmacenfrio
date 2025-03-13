@@ -81,45 +81,45 @@ const MetricsOverview = ({
   },
 }: MetricsOverviewProps) => {
   return (
-    <div className="bg-white p-4 rounded-lg shadow-sm w-full">
+    <div className="bg-white p-4 rounded-xl shadow-md w-full border border-blue-100 backdrop-blur-sm bg-white/90">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         <MetricCard
-          title="Warehouse Occupation"
+          title="Ocupación del Almacén"
           value={`${metrics.warehouseOccupation}%`}
           icon={<Package className="h-5 w-5 text-blue-600" />}
           trend={{ value: 5, isPositive: true }}
         />
 
         <MetricCard
-          title="Pending Orders"
+          title="Pedidos Pendientes"
           value={metrics.pendingOrders}
           icon={<Clock className="h-5 w-5 text-amber-600" />}
           trend={{ value: 12, isPositive: false }}
         />
 
         <MetricCard
-          title="Critical Alerts"
+          title="Alertas Críticas"
           value={metrics.criticalAlerts}
           icon={<AlertTriangle className="h-5 w-5 text-red-600" />}
           bgColor={metrics.criticalAlerts > 0 ? "bg-red-50" : "bg-white"}
         />
 
         <MetricCard
-          title="Incoming Shipments"
+          title="Envíos Entrantes"
           value={metrics.incomingShipments}
           icon={<Truck className="h-5 w-5 text-green-600" />}
           trend={{ value: 8, isPositive: true }}
         />
 
         <MetricCard
-          title="Outgoing Shipments"
+          title="Envíos Salientes"
           value={metrics.outgoingShipments}
           icon={<Truck className="h-5 w-5 text-purple-600" />}
           trend={{ value: 3, isPositive: true }}
         />
 
         <MetricCard
-          title="Expiring Products"
+          title="Productos por Caducar"
           value={metrics.expiringProducts}
           icon={<AlertTriangle className="h-5 w-5 text-amber-600" />}
           bgColor={metrics.expiringProducts > 5 ? "bg-amber-50" : "bg-white"}

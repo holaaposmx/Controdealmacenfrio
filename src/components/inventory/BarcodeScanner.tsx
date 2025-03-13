@@ -136,7 +136,7 @@ const BarcodeScanner = ({
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto bg-white shadow-lg">
+    <Card className="w-full max-w-md mx-auto bg-white shadow-lg rounded-xl border-blue-100 overflow-hidden">
       <CardHeader className="border-b">
         <div className="flex items-center justify-between">
           <CardTitle className="text-lg font-bold flex items-center gap-2">

@@ -12,8 +12,9 @@ import {
   CheckCircle,
 } from "lucide-react";
 import {
+  saveOfflineOperation,
+  getOfflineDataByKey,
   isOnline,
-  getOfflineOperations,
   syncOfflineOperations,
   initNetworkListeners,
   getNetworkStatus,
@@ -25,8 +26,8 @@ interface OfflineManagerProps {
 }
 
 const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
-  const [online, setOnline] = useState(isOnline());
-  const [pendingOperations, setPendingOperations] = useState<number>(0);
+  const [networkStatus, setNetworkStatus] = useState(isOnline());
+  const [pendingCount, setPendingCount] = useState(0);
   const [syncing, setSyncing] = useState(false);
   const [syncProgress, setSyncProgress] = useState(0);
   const [lastSync, setLastSync] = useState<string | null>(null);
@@ -38,7 +39,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
 
     // Update state based on network status
     const handleNetworkChange = () => {
-      setOnline(isOnline());
+      setNetworkStatus(isOnline());
       updatePendingOperations();
     };
 
@@ -62,11 +63,11 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
 
   const updatePendingOperations = () => {
     const operations = getOfflineOperations();
-    setPendingOperations(operations.filter((op) => !op.synced).length);
+    setPendingCount(operations.filter((op) => !op.synced).length);
   };
 
   const handleSync = async () => {
-    if (!online) return;
+    if (!networkStatus) return;
 
     setSyncing(true);
     setSyncProgress(0);
@@ -117,10 +118,10 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-bold">Offline Mode</CardTitle>
         <Badge
-          variant={online ? "outline" : "destructive"}
-          className={`flex items-center gap-1 ${online ? "bg-green-50 text-green-700" : ""}`}
+          variant={networkStatus ? "outline" : "destructive"}
+          className={`flex items-center gap-1 ${networkStatus ? "bg-green-50 text-green-700" : ""}`}
         >
-          {online ? (
+          {networkStatus ? (
             <>
               <Wifi className="h-3 w-3" /> Online
             </>
@@ -135,7 +136,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
         <div className="flex items-center justify-between">
           <div>
             <p className="text-sm font-medium">Pending Operations</p>
-            <p className="text-2xl font-bold">{pendingOperations}</p>
+            <p className="text-2xl font-bold">{pendingCount}</p>
           </div>
           <div className="h-10 w-10 rounded-full bg-blue-100 flex items-center justify-center">
             <Database className="h-5 w-5 text-blue-600" />
@@ -155,7 +156,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
         <div className="flex flex-col gap-2">
           <Button
             onClick={handleSync}
-            disabled={!online || syncing || pendingOperations === 0}
+            disabled={!networkStatus || syncing || pendingCount === 0}
             className="w-full flex items-center gap-2"
           >
             {syncing ? (
@@ -169,7 +170,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
           <Button
             variant="outline"
             onClick={handleCacheData}
-            disabled={!online || caching}
+            disabled={!networkStatus || caching}
             className="w-full flex items-center gap-2"
           >
             {caching ? (
@@ -188,7 +189,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
           </div>
         )}
 
-        {!online && (
+        {!networkStatus && (
           <div className="p-3 bg-yellow-50 rounded-md">
             <div className="flex items-center gap-2 text-yellow-700">
               <WifiOff className="h-4 w-4" />
@@ -200,12 +201,12 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
           </div>
         )}
 
-        {online && pendingOperations > 0 && (
+        {networkStatus && pendingCount > 0 && (
           <div className="p-3 bg-blue-50 rounded-md">
             <div className="flex items-center gap-2 text-blue-700">
               <Upload className="h-4 w-4" />
               <span className="text-sm font-medium">
-                {pendingOperations} operations pending
+                {pendingCount} operations pending
               </span>
             </div>
             <p className="text-xs text-blue-600 mt-1">
@@ -214,7 +215,7 @@ const OfflineManager: React.FC<OfflineManagerProps> = ({ onClose }) => {
           </div>
         )}
 
-        {online && pendingOperations === 0 && (
+        {networkStatus && pendingCount === 0 && (
           <div className="p-3 bg-green-50 rounded-md">
             <div className="flex items-center gap-2 text-green-700">
               <CheckCircle className="h-4 w-4" />

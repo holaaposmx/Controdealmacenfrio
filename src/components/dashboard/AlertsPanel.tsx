@@ -110,18 +110,18 @@ const AlertsPanel = ({
   const resolvedAlerts = alerts.filter((alert) => alert.status === "resolved");
 
   return (
-    <Card className="w-full bg-white shadow-sm">
+    <Card className="w-full bg-white shadow-md rounded-xl border-blue-100">
       <CardHeader>
         <div className="flex justify-between items-center">
-          <CardTitle className="text-xl font-bold">Critical Alerts</CardTitle>
+          <CardTitle className="text-xl font-bold">Alertas Críticas</CardTitle>
           <div className="flex gap-2">
             <Badge variant="destructive" className="flex items-center gap-1">
               <span className="h-2 w-2 rounded-full bg-white animate-pulse"></span>
-              {activeAlerts.length} Active
+              {activeAlerts.length} Activas
             </Badge>
             <Badge variant="outline" className="flex items-center gap-1">
               <CheckCircleIcon className="h-3 w-3" />
-              {resolvedAlerts.length} Resolved
+              {resolvedAlerts.length} Resueltas
             </Badge>
           </div>
         </div>
@@ -131,7 +131,7 @@ const AlertsPanel = ({
           {activeAlerts.length === 0 && (
             <div className="text-center py-8 text-muted-foreground">
               <CheckCircleIcon className="h-12 w-12 mx-auto mb-2 text-green-500" />
-              <p>No active alerts at this time.</p>
+              <p>No hay alertas activas en este momento.</p>
             </div>
           )}
 
@@ -178,14 +178,14 @@ const AlertsPanel = ({
                     className="flex items-center gap-1"
                   >
                     <CheckCircleIcon className="h-4 w-4" />
-                    Resolve
+                    Resolver
                   </Button>
                   <Button
                     variant="ghost"
                     size="sm"
                     onClick={() => onViewDetails(alert.id)}
                   >
-                    Details
+                    Detalles
                   </Button>
                 </div>
               </div>
@@ -195,7 +195,7 @@ const AlertsPanel = ({
           {resolvedAlerts.length > 0 && (
             <div className="mt-6">
               <h4 className="text-sm font-medium text-muted-foreground mb-3">
-                Recently Resolved
+                Resueltas Recientemente
               </h4>
               {resolvedAlerts.map((alert) => (
                 <div

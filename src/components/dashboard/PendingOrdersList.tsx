@@ -82,9 +82,9 @@ const PendingOrdersList = ({
   };
 
   return (
-    <div className="w-full h-full bg-white rounded-lg shadow-sm p-4 overflow-hidden flex flex-col border">
+    <div className="w-full h-full bg-white rounded-xl shadow-md p-4 overflow-hidden flex flex-col border border-blue-100">
       <div className="flex justify-between items-center mb-4">
-        <h2 className="text-xl font-semibold">Pending Orders</h2>
+        <h2 className="text-xl font-semibold">Pedidos Pendientes</h2>
         <Button variant="outline" size="sm">
           View All
         </Button>

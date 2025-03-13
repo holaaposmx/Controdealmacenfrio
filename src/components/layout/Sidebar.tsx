@@ -56,34 +56,38 @@ const Sidebar = ({
   }, []);
 
   const navItems = [
-    { icon: <Home size={20} />, label: t("sidebar.dashboard"), path: "/" },
     {
-      icon: <Boxes size={20} />,
+      icon: <Home size={22} className="text-blue-600" />,
+      label: t("sidebar.dashboard"),
+      path: "/",
+    },
+    {
+      icon: <Boxes size={22} className="text-indigo-600" />,
       label: t("sidebar.inventory"),
       path: "/inventory",
     },
     {
-      icon: <Package size={20} />,
+      icon: <Package size={22} className="text-purple-600" />,
       label: t("sidebar.spaceAllocation"),
       path: "/space-allocation",
     },
     {
-      icon: <ClipboardCheck size={20} />,
+      icon: <ClipboardCheck size={22} className="text-green-600" />,
       label: t("sidebar.qualityControl"),
       path: "/quality",
     },
     {
-      icon: <FileText size={20} />,
+      icon: <FileText size={22} className="text-amber-600" />,
       label: t("sidebar.reports"),
       path: "/reports",
     },
     {
-      icon: <Truck size={20} />,
+      icon: <Truck size={22} className="text-red-600" />,
       label: t("sidebar.logistics"),
       path: "/logistics",
     },
     {
-      icon: <BarChart3 size={20} />,
+      icon: <BarChart3 size={22} className="text-cyan-600" />,
       label: t("sidebar.analytics"),
       path: "/analytics",
     },
@@ -96,64 +100,66 @@ const Sidebar = ({
         className={`fixed inset-0 z-50 transform ${isMobileOpen ? "translate-x-0" : "-translate-x-full"} transition-transform duration-200 ease-in-out md:hidden`}
       >
         <div
-          className="absolute inset-0 bg-black/50"
+          className="absolute inset-0 bg-black/50 backdrop-blur-sm"
           onClick={onMobileClose}
         ></div>
         <div className="absolute top-0 left-0 bottom-0 w-[280px] bg-background shadow-xl flex flex-col">
           {/* Header with close button */}
           <div className="p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
-              <div className="bg-primary h-8 w-8 rounded-md flex items-center justify-center">
-                <Boxes className="text-primary-foreground" size={20} />
+              <div className="bg-gradient-to-br from-primary to-secondary h-12 w-12 rounded-xl flex items-center justify-center shadow-md">
+                <Boxes className="text-primary-foreground" size={24} />
               </div>
-              <h1 className="text-xl font-bold">{t("sidebar.appName")}</h1>
+              <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+                {t("sidebar.appName")}
+              </h1>
             </div>
             <Button variant="ghost" size="icon" onClick={onMobileClose}>
               <X size={20} />
             </Button>
           </div>
 
-          <Separator />
+          <Separator className="mb-2" />
 
           {/* Navigation */}
-          <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+          <nav className="flex-1 px-4 py-2 space-y-3 overflow-y-auto">
             {navItems.map((item, index) => (
               <NavLink
                 key={index}
                 to={item.path}
                 className={({ isActive }) =>
-                  `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? "bg-primary/10 text-primary" : "hover:bg-muted"}`
+                  `flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${isActive ? "bg-primary/10 text-primary font-medium shadow-sm" : "hover:bg-muted hover:shadow-sm"}`
                 }
                 onClick={onMobileClose}
               >
                 {item.icon}
-                <span>{item.label}</span>
+                <span className="text-base">{item.label}</span>
               </NavLink>
             ))}
           </nav>
 
-          <Separator />
+          <Separator className="mt-2" />
 
           {/* Settings */}
           <div className="p-4">
             <NavLink
               to="/settings"
               className={({ isActive }) =>
-                `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? "bg-primary/10 text-primary" : "hover:bg-muted"}`
+                `flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${isActive ? "bg-primary/10 text-primary font-medium shadow-sm" : "hover:bg-muted hover:shadow-sm"}`
               }
               onClick={onMobileClose}
             >
-              <Settings size={20} />
-              <span>{t("sidebar.settings")}</span>
+              <Settings size={22} className="text-gray-600" />
+              <span className="text-base">{t("sidebar.settings")}</span>
             </NavLink>
           </div>
 
           {/* User Profile */}
-          <div className="p-4 border-t">
+          <div className="p-4 border-t bg-gray-50">
             <div className="flex items-center gap-3 p-2">
-              <Avatar>
+              <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
                 <AvatarImage src={userAvatar} alt={userName} />
-                <AvatarFallback>
+                <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
                   {userName.substring(0, 2).toUpperCase()}
                 </AvatarFallback>
               </Avatar>
@@ -165,7 +171,11 @@ const Sidebar = ({
                     : userRole}
                 </p>
               </div>
-              <Button variant="ghost" size="icon">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hover:bg-red-50 hover:text-red-600 transition-colors"
+              >
                 <LogOut size={18} />
               </Button>
             </div>
@@ -178,38 +188,40 @@ const Sidebar = ({
   // Desktop sidebar
   return (
     <div
-      className={`h-full ${collapsed ? "w-[70px]" : "w-[280px]"} bg-background border-r flex flex-col transition-all duration-200 hidden md:flex`}
+      className={`h-full ${collapsed ? "w-[80px]" : "w-[280px]"} bg-background border-r flex flex-col transition-all duration-200 hidden md:flex shadow-sm`}
     >
       {/* Logo and Header */}
       <div className="p-4 flex items-center justify-between">
-        <div className="flex items-center gap-2">
-          <div className="bg-primary h-8 w-8 rounded-md flex items-center justify-center">
-            <Boxes className="text-primary-foreground" size={20} />
+        <div className="flex items-center gap-3">
+          <div className="bg-gradient-to-br from-primary to-secondary h-12 w-12 rounded-xl flex items-center justify-center shadow-md">
+            <Boxes className="text-primary-foreground" size={24} />
           </div>
           {!collapsed && (
-            <h1 className="text-xl font-bold">{t("sidebar.appName")}</h1>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+              {t("sidebar.appName")}
+            </h1>
           )}
         </div>
         <Button
           variant="ghost"
           size="icon"
           onClick={onToggleCollapse}
-          className={collapsed ? "" : ""}
+          className={`rounded-full hover:bg-gray-100 ${collapsed ? "" : ""}`}
         >
           {collapsed ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
         </Button>
       </div>
 
-      <Separator />
+      <Separator className="mb-2" />
 
       {/* Navigation */}
-      <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
+      <nav className="flex-1 px-4 py-2 space-y-3 overflow-y-auto">
         {navItems.map((item, index) => (
           <NavLink
             key={index}
             to={item.path}
             className={({ isActive }) =>
-              `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? "bg-primary/10 text-primary" : "hover:bg-muted"}`
+              `flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${isActive ? "bg-primary/10 text-primary font-medium shadow-sm" : "hover:bg-muted hover:shadow-sm"}`
             }
           >
             {collapsed ? (
@@ -220,7 +232,7 @@ const Sidebar = ({
                       {item.icon}
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent side="right">
+                  <TooltipContent side="right" className="font-medium">
                     <p>{item.label}</p>
                   </TooltipContent>
                 </Tooltip>
@@ -228,21 +240,21 @@ const Sidebar = ({
             ) : (
               <>
                 {item.icon}
-                <span>{item.label}</span>
+                <span className="text-base">{item.label}</span>
               </>
             )}
           </NavLink>
         ))}
       </nav>
 
-      <Separator />
+      <Separator className="mt-2" />
 
       {/* Settings */}
       <div className="p-4">
         <NavLink
           to="/settings"
           className={({ isActive }) =>
-            `flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${isActive ? "bg-primary/10 text-primary" : "hover:bg-muted"}`
+            `flex items-center gap-4 px-4 py-3 rounded-xl transition-all ${isActive ? "bg-primary/10 text-primary font-medium shadow-sm" : "hover:bg-muted hover:shadow-sm"}`
           }
         >
           {collapsed ? (
@@ -250,29 +262,29 @@ const Sidebar = ({
               <Tooltip>
                 <TooltipTrigger asChild>
                   <div className="flex justify-center w-full">
-                    <Settings size={20} />
+                    <Settings size={22} className="text-gray-600" />
                   </div>
                 </TooltipTrigger>
-                <TooltipContent side="right">
+                <TooltipContent side="right" className="font-medium">
                   <p>{t("sidebar.settings")}</p>
                 </TooltipContent>
               </Tooltip>
             </TooltipProvider>
           ) : (
             <>
-              <Settings size={20} />
-              <span>{t("sidebar.settings")}</span>
+              <Settings size={22} className="text-gray-600" />
+              <span className="text-base">{t("sidebar.settings")}</span>
             </>
           )}
         </NavLink>
       </div>
 
       {/* User Profile */}
-      <div className="p-4 border-t">
+      <div className="p-4 border-t bg-gray-50">
         <div className="flex items-center gap-3 p-2">
-          <Avatar>
+          <Avatar className="h-10 w-10 border-2 border-white shadow-sm">
             <AvatarImage src={userAvatar} alt={userName} />
-            <AvatarFallback>
+            <AvatarFallback className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white">
               {userName.substring(0, 2).toUpperCase()}
             </AvatarFallback>
           </Avatar>
@@ -287,7 +299,11 @@ const Sidebar = ({
             </div>
           )}
           {!collapsed && (
-            <Button variant="ghost" size="icon">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="hover:bg-red-50 hover:text-red-600 transition-colors"
+            >
               <LogOut size={18} />
             </Button>
           )}

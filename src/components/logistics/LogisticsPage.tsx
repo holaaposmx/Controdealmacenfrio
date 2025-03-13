@@ -61,9 +61,9 @@ const LogisticsPage: React.FC<LogisticsPageProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">Logistics Operations</h1>
+              <h1 className="text-2xl font-bold">Operaciones de Logística</h1>
               <p className="text-muted-foreground">
-                Manage shipments, deliveries, and returns
+                Gestionar envíos, entregas y devoluciones
               </p>
             </div>
             <div className="flex gap-2">

@@ -190,9 +190,9 @@ const InventoryPage: React.FC<InventoryPageProps> = ({
         <div className="flex-1 overflow-y-auto p-4 md:p-6">
           <div className="mb-6 flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <h1 className="text-2xl font-bold">Inventory Management</h1>
+              <h1 className="text-2xl font-bold">Gestión de Inventario</h1>
               <p className="text-muted-foreground">
-                Manage products, stock levels, and locations
+                Gestionar productos, niveles de stock y ubicaciones
               </p>
             </div>
             <div className="flex gap-2">

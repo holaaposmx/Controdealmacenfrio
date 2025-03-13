@@ -99,34 +99,34 @@ const Home: React.FC<HomeProps> = ({
         />
 
         {/* Main Dashboard Content */}
-        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 md:space-y-6">
+        <div className="flex-1 overflow-y-auto p-4 md:p-6 space-y-4 md:space-y-6 bg-gradient-to-b from-blue-50/50 to-white">
           {/* Quick Access Buttons */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 md:gap-4">
             <Link to="/inventory" className="w-full">
               <Button
-                variant="outline"
-                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 shadow-sm"
+                variant="gradient"
+                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 shadow-md rounded-xl"
               >
-                <Barcode className="h-5 w-5 text-blue-600" />
-                <span>Inventory Management</span>
+                <Barcode className="h-5 w-5 text-white" />
+                <span>Gestión de Inventario</span>
               </Button>
             </Link>
             <Link to="/space-allocation" className="w-full">
               <Button
-                variant="outline"
-                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 shadow-sm"
+                variant="gradient"
+                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 shadow-md rounded-xl"
               >
-                <Package className="h-5 w-5 text-green-600" />
-                <span>Space Allocation</span>
+                <Package className="h-5 w-5 text-white" />
+                <span>Asignación de Espacios</span>
               </Button>
             </Link>
             <Link to="/quality" className="w-full">
               <Button
-                variant="outline"
-                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 bg-white hover:bg-gray-100 shadow-sm"
+                variant="gradient"
+                className="w-full h-14 md:h-16 flex items-center justify-center gap-2 shadow-md rounded-xl"
               >
-                <ClipboardCheck className="h-5 w-5 text-amber-600" />
-                <span>Quality Control</span>
+                <ClipboardCheck className="h-5 w-5 text-white" />
+                <span>Control de Calidad</span>
               </Button>
             </Link>
           </div>
@@ -165,7 +165,7 @@ const Home: React.FC<HomeProps> = ({
           {/* Floating Action Button for Barcode Scanner */}
           <button
             onClick={() => setShowScanner(true)}
-            className="fixed bottom-6 right-6 bg-primary text-white p-3 md:p-4 rounded-full shadow-lg hover:bg-primary/90 transition-colors z-10 flex items-center justify-center"
+            className="fixed bottom-6 right-6 bg-gradient-to-r from-primary to-secondary text-white p-3 md:p-4 rounded-full shadow-lg hover:brightness-105 transition-all z-10 flex items-center justify-center animate-pulse"
             aria-label="Scan Barcode"
           >
             <Scan className="h-5 w-5 md:h-6 md:w-6" />

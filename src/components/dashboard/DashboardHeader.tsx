@@ -68,7 +68,7 @@ const DashboardHeader: React.FC<DashboardHeaderProps> = ({
   }, []);
 
   return (
-    <header className="bg-white border-b border-gray-200 h-20 px-4 md:px-6 flex items-center justify-between w-full shadow-sm sticky top-0 z-10">
+    <header className="bg-white border-b border-gray-200 h-20 px-4 md:px-6 flex items-center justify-between w-full shadow-md sticky top-0 z-10 bg-gradient-to-r from-white to-blue-50">
       <div className="flex items-center space-x-4">
         {onToggleSidebar && (
           <Button

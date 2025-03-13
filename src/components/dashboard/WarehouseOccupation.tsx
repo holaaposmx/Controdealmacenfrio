@@ -53,10 +53,10 @@ const WarehouseOccupation = ({
   };
 
   return (
-    <Card className="w-full h-full bg-white shadow-sm">
+    <Card className="w-full h-full bg-white shadow-md rounded-xl border-blue-100 overflow-hidden">
       <CardHeader className="flex flex-row items-center justify-between pb-2">
         <CardTitle className="text-xl font-bold">
-          Warehouse Occupation
+          Ocupación del Almacén
         </CardTitle>
         <BarChart className="h-5 w-5 text-gray-500" />
       </CardHeader>
